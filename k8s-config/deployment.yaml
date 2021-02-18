@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic-nodejs-deployment
+  labels:
+    app: basic-nodejs-deployment
+  namespace: basic-nodejs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: basic-nodejs-deployment
+  template:
+    metadata:
+      labels:
+        app: basic-nodejs-deployment
+    spec:
+      containers:
+      - name: basic-nodejs-pod
+        image: alexasparks1991/basic-nodejs:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: HELLO_GREETING
+          value: "Hello from K8s pod"
+        - name: BYE_GREETING
+          value: "Bye from K8s pod"
