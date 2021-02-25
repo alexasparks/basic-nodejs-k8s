@@ -1,12 +1,14 @@
-apiVersion: cert-manager.io/v1
+apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: basic-nodejs-cert
-  namespace: default
+  namespace: basic-nodejs
 spec:
-  secretName: basic-nodejs-cert
+  secretName: basic-nodejs-tls
+  duration: 2160h
+  renewBefore: 360h
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
   commonName: trickshotrodeo.com
   dnsNames:

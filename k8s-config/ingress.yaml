@@ -3,6 +3,10 @@ kind: Ingress
 metadata:
   name: basic-nodejs-ingress
   namespace: basic-nodejs
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/acme-challenge-type: dns101
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
 spec:
   backend:
     serviceName: basic-nodejs-service
@@ -16,3 +20,7 @@ spec:
         backend:
           serviceName: basic-nodejs-service
           servicePort: 3200
+  tls:
+  - hosts:
+    - trickshotrodeo.com
+    secretName: basic-nodejs-tls
