@@ -1,17 +1,18 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: basic-nodejs-ingress
   namespace: basic-nodejs
 spec:
+  backend:
+    serviceName: basic-nodejs-service
+    servicePort: 3200
   rules:
-  - host: basicnodejs.com
+  - host: trickshotrodeo.com
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
-          service:
-            name: basic-nodejs-service
-            port:
-              number: 3200
+          serviceName: basic-nodejs-service
+          servicePort: 3200
